@@ -40,7 +40,7 @@ class Mascota extends Animal {
 }
 // ----------------------- Creacion de clases finalizada -----------------------
 
-function crearDatosConsulta() {
+const crearDatosConsulta = () => {
     const nombre = document.querySelector('#propietario').value
     const telefono = document.querySelector('#telefono').value
     const direccion = document.querySelector('#direccion').value
@@ -66,19 +66,27 @@ function crearDatosConsulta() {
     // Realmente solo lo usamos para instanciar el objeto con un nombre en especifico, sin embargo podria ser resumido en una sola linea y generaria el mismo resultado
 }
 
-function imprimirDatos(event) {
+const limpiezaDeLabels = () => {
+    document.querySelector('#propietario').value = ""
+    document.querySelector('#telefono').value = ""
+    document.querySelector('#direccion').value = ""
+    document.querySelector('#nombreMascota').value = ""
+    document.querySelector('#enfermedad').value = ""
+}
+
+const imprimirDatos = event => {
     event.preventDefault()
     const datosDeAtencion = crearDatosConsulta() // Ejecutamos la funcion para asignar el objeto a una nueva variable
-
     if (datosDeAtencion) {
         const selectorDeLista = document.querySelector('#resultado > ul')
         selectorDeLista.innerHTML = `<li>${datosDeAtencion.datosPropietario()}</li> <li>${datosDeAtencion.tipo}, mientras que el nombre de la mascota es: ${datosDeAtencion.nombreMascota} y la enfermedad es: ${datosDeAtencion.enfermedad}.</li>`
+        limpiezaDeLabels()
     }
 }
 
 // ----------------------- Funciones finalizadas -----------------------
 
-const selectorAgregar = document.querySelector('#agregar')
+const selectorAgregar = document.querySelector('#formulario')
 selectorAgregar.addEventListener('submit', imprimirDatos)
 
 // ----------------------- Agregamos el evento submit al boton y comenzamos a ejecutar las funciones -----------------------
